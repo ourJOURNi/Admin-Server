@@ -91,7 +91,7 @@ app.use("/api/admin/events", adminEventsRoute);
 app.use("/api/admin/posts", adminPostsRoute);
 
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 server = app.listen(port, () => {
   console.log('Starting FYF Server\n');
   console.log(`Listening on port ${port}...`)
