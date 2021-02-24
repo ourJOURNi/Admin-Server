@@ -1,4 +1,4 @@
-const Admin = require('../../models/admin.model');
+const Admin = require('../models/admin.model');
 
 exports.registerAdmin = (req, res) => {
   console.log(req.body);

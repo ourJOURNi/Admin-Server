@@ -1,10 +1,10 @@
-const Post = require('../../models/post.model');
-const DeniedPost = require('../../models/denied-post.model');
-const PostQueue = require('../../models/postqueue.model');
-const User = require('../../models/user.model');
-const Comment = require('../../models/comment.model');
-const ReportedComment = require('../../models/reported-comment.model');
-const ReportedCommentArchive = require('../../models/reported-comment-archieve.model');
+const Post = require('../models/post.model');
+const DeniedPost = require('../models/denied-post.model');
+const PostQueue = require('../models/postqueue.model');
+const User = require('../models/user.model');
+const Comment = require('../models/comment.model');
+const ReportedComment = require('../models/reported-comment.model');
+const ReportedCommentArchive = require('../models/reported-comment-archieve.model');
 
 
 exports.getPosts = (req, res) => {

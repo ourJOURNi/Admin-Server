@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const postController  = require('../../controller/admin/posts-controller');
+const postController  = require('../controller/posts-controller');
 
 router.get('/', postController.getPosts)
 router.get('/verify', postController.getPostsToBeVerified)

@@ -1,5 +1,5 @@
 // Student Controller would need the User Model
-const User = require('../../models/user.model');
+const User = require('../models/user.model');
 
 exports.getUsers = (req, res) => {
 

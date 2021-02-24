@@ -1,6 +1,6 @@
 const express = require("express");
 const router  = express.Router();
-var mentorsController  = require('../../controller/admin/mentors-controller');
+var mentorsController  = require('../controller/mentors-controller');
 
 router.get('/',  mentorsController.getMentors)
 router.post('/add-mentor', mentorsController.addMentor)

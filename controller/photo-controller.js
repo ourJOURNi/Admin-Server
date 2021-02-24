@@ -6,9 +6,9 @@ const router    = express.Router();
 const fs        = require('fs');
 const path      = require('path');
 
-const Job       = require('../../models/job.model');
-const Event     = require('../../models/events.model');
-const Mentor    = require('../../models/mentor.model');
+const Job       = require('../models/job.model');
+const Event     = require('../models/events.model');
+const Mentor    = require('../models/mentor.model');
 
 dotenv.config();
 

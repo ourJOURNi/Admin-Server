@@ -1,4 +1,4 @@
-const Event = require('../../FYF-Server/models/events.model');
+const Event = require('../models/events.model');
 const nodemailer = require('nodemailer');
 const date = require('date-fns');
 

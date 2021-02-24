@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-var studentsController  = require('../../controller/admin/students-controller');
+var studentsController  = require('../controller/students-controller');
 
 router.get('/', studentsController.getUsers);
 router.post('/', studentsController.findUser);

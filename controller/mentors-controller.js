@@ -1,4 +1,4 @@
-const Mentor = require('../../models/mentor.model');
+const Mentor = require('../models/mentor.model');
 const nodemailer = require('nodemailer');
 
 exports.getMentors = (req, res) => {

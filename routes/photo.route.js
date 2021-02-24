@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const photoController = require('../../controller/admin/photo-controller');
+const photoController = require('../controller/photo-controller');
 
 const JOB_LOGO_DIR = 'job-logos';
 const EVENT_PHOTOS_DIR = 'event-photos';

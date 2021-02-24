@@ -1,4 +1,4 @@
-const Job = require('../../models/job.model');
+const Job = require('../models/job.model');
 
 exports.getJobs = (req, res) => {
   console.log('Getting all Jobs');
