@@ -1,7 +1,7 @@
 const config                  = require("config");
 const express                 = require("express");
 const app                     = express();
-const mongoose                = require("mongoose");
+const Mongoose                = require("mongoose").Mongoose;
 const passport 	              = require('passport');
 const cors                    = require('cors');
 const dotenv                  = require('dotenv');
@@ -18,11 +18,6 @@ const adminPostsRoute        = require("./routes/posts.route");
 // Configure Environment Variables
 dotenv.config();
 
-// Initiate Socket.IO Config
-
-console.log(process.env.DB_HOST_DEV)
-
-
 // use config module to get the privatekey, if no private key set, end the application
 if (!config.get("jwtSecret")) {
   console.error("FATAL ERROR: myprivatekey is not defined.");
@@ -30,22 +25,45 @@ if (!config.get("jwtSecret")) {
 }
 
 // config and connect to mongodb
-// console.log('Attempting connection to Mongo Atlas...');
 console.log('Connecting via Mongoose to host: ');
 
-mongoose
-  // For DeprecationWarning:  collection.ensureIndex is deprecated.  Use createIndexes instead.
-
+var adminInstance = new Mongoose();
+adminInstance
   .set('useCreateIndex', true)
   .set('useFindAndModify', false)
-
-  .connect(process.env.DB_HOST_DEV, { useNewUrlParser: true, useUnifiedTopology: true })
-
-  .then(() => console.log("Connected to MongoDB...\n"))
-
+  .connect(process.env.DB_HOST_ADMIN, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("Connected to adminInstance...\n"))
   .catch(err =>
-    console.error(err))
-// // Use the passport package in our application
+    console.error(err));
+
+var fyfInstance = new Mongoose();
+fyfInstance
+  .set('useCreateIndex', true)
+  .set('useFindAndModify', false)
+  .connect(process.env.DB_HOST_FYF, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("Connected to fyfInstance...\n"))
+  .catch(err =>
+    console.error(err));
+
+var uwsemInstance = new Mongoose();
+uwsemInstance
+  .set('useCreateIndex', true)
+  .set('useFindAndModify', false)
+  .connect(process.env.DB_HOST_UWSEM, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("Connected to uwsemInstance...\n"))
+  .catch(err =>
+    console.error(err));
+
+// mongoose
+  // For DeprecationWarning:  collection.ensureIndex is deprecated.  Use createIndexes instead.
+  // .set('useCreateIndex', true)
+  // .set('useFindAndModify', false)
+  // .connect(process.env.DB_HOST_ADMIN, { useNewUrlParser: true, useUnifiedTopology: true })
+  // .then(() => console.log("Connected to MongoDB...\n"))
+  // .catch(err =>
+  //   console.error(err));
+
+// Use the passport package in our application
 app.use(passport.initialize());
 var passportMiddleware = require('./middleware/passport');
 passport.use(passportMiddleware);
