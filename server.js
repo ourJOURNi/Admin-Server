@@ -27,41 +27,14 @@ if (!config.get("jwtSecret")) {
 // config and connect to mongodb
 console.log('Connecting via Mongoose to host: ');
 
-var adminInstance = new Mongoose();
-adminInstance
+mongoose
+  // For DeprecationWarning:  collection.ensureIndex is deprecated.  Use createIndexes instead.
   .set('useCreateIndex', true)
   .set('useFindAndModify', false)
   .connect(process.env.DB_HOST_ADMIN, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("Connected to adminInstance...\n"))
+  .then(() => console.log("Connected to MongoDB...\n"))
   .catch(err =>
     console.error(err));
-
-var fyfInstance = new Mongoose();
-fyfInstance
-  .set('useCreateIndex', true)
-  .set('useFindAndModify', false)
-  .connect(process.env.DB_HOST_FYF, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("Connected to fyfInstance...\n"))
-  .catch(err =>
-    console.error(err));
-
-var uwsemInstance = new Mongoose();
-uwsemInstance
-  .set('useCreateIndex', true)
-  .set('useFindAndModify', false)
-  .connect(process.env.DB_HOST_UWSEM, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("Connected to uwsemInstance...\n"))
-  .catch(err =>
-    console.error(err));
-
-// mongoose
-  // For DeprecationWarning:  collection.ensureIndex is deprecated.  Use createIndexes instead.
-  // .set('useCreateIndex', true)
-  // .set('useFindAndModify', false)
-  // .connect(process.env.DB_HOST_ADMIN, { useNewUrlParser: true, useUnifiedTopology: true })
-  // .then(() => console.log("Connected to MongoDB...\n"))
-  // .catch(err =>
-  //   console.error(err));
 
 // Use the passport package in our application
 app.use(passport.initialize());
