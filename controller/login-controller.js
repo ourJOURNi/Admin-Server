@@ -27,6 +27,8 @@ exports.registerAdmin = (req, res) => {
 }
 
 exports.loginAdmin = (req, res) => {
+    console.log('Attempting to Login ...');
+    
   if (!req.body.username || !req.body.password) {
     return res.status(400).send({ 'msg': 'You need to send username and password' });
 }
