@@ -14,6 +14,7 @@ const adminStudentsRoute     = require("./routes/students.route");
 const adminMentorsRoute      = require("./routes/mentor.route");
 const adminEventsRoute       = require("./routes/events.route");
 const adminPostsRoute        = require("./routes/posts.route");
+const adminFairsRoute        = require("./routes/fairs.route");
 
 // Configure Environment Variables
 dotenv.config();
@@ -31,7 +32,7 @@ mongoose
   // For DeprecationWarning:  collection.ensureIndex is deprecated.  Use createIndexes instead.
   .set('useCreateIndex', true)
   .set('useFindAndModify', false)
-  .connect(process.env.DB_HOST_ADMIN, { useNewUrlParser: true, useUnifiedTopology: true })
+  .connect(process.env.DB_HOST_DEV, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("Connected to MongoDB...\n"))
   .catch(err =>
     console.error(err));
@@ -52,6 +53,7 @@ app.use("/api/admin/students", adminStudentsRoute);
 app.use("/api/admin/mentors", adminMentorsRoute);
 app.use("/api/admin/events", adminEventsRoute);
 app.use("/api/admin/posts", adminPostsRoute);
+app.use("/api/admin/fairs", adminFairsRoute);
 
 
 const port = process.env.PORT || 5000;
