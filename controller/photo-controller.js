@@ -23,7 +23,7 @@ const s3 = new aws.S3();
 
 // Local directory for job logos
 const jobLogoStorage = multer.diskStorage({
-  destination : 'job-logo-uploads/',
+  destination : 'job-logos/',
   filename: function (req, file, cb) {
     let counter = 1;
     // Adding the a counter and current date to each filename so that each file is unique

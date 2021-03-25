@@ -18,11 +18,9 @@ let JobSchema = new mongoose.Schema({
   },
   summary: {
     type: String,
-    maxlength: 100
   },
   fullJobDescription: {
     type: String,
-    maxlength: 500
   },
   rateOfPay: {
     type: Number

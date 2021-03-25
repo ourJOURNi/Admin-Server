@@ -34,11 +34,15 @@ exports.addJob = (req, res) => {
 }
 
 exports.updateJob = (req, res) => {
-  if ( !req.body.title || !req.body.companyName || !req.body.companyEmail || !req.body.summary || !req.body.fullJobDescription || !req.body.rateOfPay ) {
-    return res.status(400).send('Please enter a title, company name, company email, summary, full job description, rate of pay, and date created. You are missing one or more fields.');
-  }
+  console.log(req.body.companyLogo);
+  
+  // if ( !req.body.title || !req.body.companyName || !req.body.companyEmail || !req.body.logoUrl || !req.body.summary || !req.body.fullJobDescription || !req.body.rateOfPay ) {
+  //   return res.status(400).send('Please enter a title, company name, company email, summary, full job description, rate of pay, and date created. You are missing one or more fields.');
+  // }
 
   let updatedJob = req.body;
+  // console.log(updatedJob);
+
   let condition = { _id: req.body._id };
 
   Job.updateOne(condition, updatedJob, (err, job) => {
@@ -46,7 +50,7 @@ exports.updateJob = (req, res) => {
       return res.status(400).send('There was an error updating the job in the database: \n\n' + err);
     }
 
-    console.log('Updated Job: ' + job);
+    // console.log('Updated Job: ' + job);
     return res.status(200).send(job);
     }
   )

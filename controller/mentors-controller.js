@@ -16,11 +16,7 @@ exports.getMentors = (req, res) => {
 exports.addMentor = (req, res) => {
 
   let mentor = req.body.mentor;
-  let photoURL = req.body.photoURL;
-
-  if ( !mentor.name || !mentor.email || !mentor.address || !mentor.city || !mentor.state || !mentor.zip || !mentor.phone || !mentor.description || !mentor.photo   ) {
-    return res.status(400).send('Please enter a name, email, address, city, state, description, and photo. You are missing one or more fields.');
-  }
+  let photoURL = req.body.photo;
 
   let newMentor = Mentor(mentor);
   newMentor.photo = photoURL;
@@ -35,10 +31,6 @@ exports.addMentor = (req, res) => {
 }
 
 exports.updateMentor = (req, res) => {
-
-  if ( !req.body.name || !req.body.email || !req.body.address || !req.body.city || !req.body.state || !req.body.phone || !req.body.description || !req.body.photo   ) {
-    return res.status(400).send('Please enter a name, email, address, city, state, description, and photo. You are missing one or more fields.');
-  }
 
   let updatedMentor = req.body;
   let condition = { _id: req.body._id };
