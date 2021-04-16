@@ -6,10 +6,10 @@ let FairSchema = new mongoose.Schema({
     maxlength: 100
   },
   date: {
-    type: Date,
+    type: String,
   },
   time: {
-    type: Date,
+    type: String,
   },
   address: {
     type: String,
@@ -28,7 +28,7 @@ let FairSchema = new mongoose.Schema({
   },
   summary: {
     type: String,
-    maxlength: 250
+    // maxlength: 250
   },
   students: {
     type: [],
@@ -93,4 +93,4 @@ let FairSchema = new mongoose.Schema({
 })
 
 
-module.exports = Fair = mongoose.model('Fair', FairSchema); 
+module.exports = Fair = mongoose.model('Fair', FairSchema);

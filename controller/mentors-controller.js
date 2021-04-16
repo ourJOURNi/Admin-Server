@@ -14,12 +14,10 @@ exports.getMentors = (req, res) => {
 }
 
 exports.addMentor = (req, res) => {
-
-  let mentor = req.body.mentor;
-  let photoURL = req.body.photo;
-
+  let mentor = req.body
+  ;
+  console.log(mentor);
   let newMentor = Mentor(mentor);
-  newMentor.photo = photoURL;
 
   newMentor.save( (err, mentor) => {
     if ( err ) {

@@ -1,6 +1,5 @@
 const Event = require('../models/events.model');
-const nodemailer = require('nodemailer');
-const date = require('date-fns');
+const { format } = require('date-fns');
 
 exports.getEvents = (req, res) => {
   console.log('Getting all Mentors');
@@ -13,7 +12,6 @@ exports.getEvents = (req, res) => {
     return res.send(event);
   });
 }
-
 exports.addEvent = (req, res) => {
 
   let eventDetails = req.body.event;
@@ -28,8 +26,8 @@ exports.addEvent = (req, res) => {
     state: eventDetails.state,
     zip: eventDetails.zip,
     // Date of the event
-    date: eventDetails.date,
-    time: eventDetails.time,
+    date: format(new Date(eventDetails.date), 'MMMM dd, yyyy'),
+    time: format(new Date(eventDetails.date), 'hh:mm a'),
     // Date the event was created
     dateCreated: Date.now(),
     description: eventDetails.description,
@@ -46,8 +44,8 @@ exports.addEvent = (req, res) => {
     return res.status(200).send(event);
   })
 }
-
 exports.updateEvent = (req, res) => {
+  console.log(req.body);
 
   if (!req.body._id  ) {
     return res.status(400).send('There was no _id in the request body');
@@ -66,7 +64,6 @@ exports.updateEvent = (req, res) => {
     }
   )
 }
-
 exports.deleteEvent = (req, res) => {
 
   Event.findByIdAndDelete( req.params._id, (err) => {

@@ -30,7 +30,6 @@ const jobLogoStorage = multer.diskStorage({
     cb(null, '00' + counter + '00' + Date.now() + '_job-logo' + path.extname(file.originalname));
   }
 });
-
 exports.jobLogoUpload = multer({
   storage: jobLogoStorage,
   // Filters what the files that are uploaded
@@ -61,7 +60,6 @@ const eventPhotoStorage = multer.diskStorage({
     cb(null, '00' + counter + '00' + Date.now() + '_event-photo' + path.extname(file.originalname));
   }
 });
-
 exports.eventPhotoUpload = multer({
   storage: eventPhotoStorage,
   // Filters what the files that are uploaded
@@ -92,7 +90,6 @@ const mentorPhotoStorage = multer.diskStorage({
     cb(null, '00' + counter + '00' + Date.now() + '_mentor-photo' + path.extname(file.originalname));
   }
 });
-
 exports.mentorPhotoUpload = multer({
   storage: mentorPhotoStorage,
   // Filters what the files that are uploaded

@@ -4,7 +4,7 @@ var eventsController  = require('../controller/events-controller');
 
 router.get('/',  eventsController.getEvents)
 router.post('/add-event', eventsController.addEvent)
-router.put('/update-event', eventsController.updateEvent)
+router.post('/update-event', eventsController.updateEvent)
 router.delete('/delete-event/:_id', eventsController.deleteEvent)
 
 module.exports = router;

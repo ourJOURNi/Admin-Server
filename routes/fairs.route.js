@@ -8,7 +8,7 @@ router.get('/', fairsController.getFairs );
 router.post('/fair', fairsController.getFair );
 router.post('/add-fair', fairsController.addFair );
 router.post('/print-students', fairsController.printStudents);
-router.delete('/delete-fair/:_id', fairsController.deleteFair );
+router.post('/delete-fair', fairsController.deleteFair );
 
 router.post('/add-student-agenda-item', fairsController.addStudentAgendaItem );
 router.post('/delete-student-agenda-item', fairsController.deleteStudentAgendaItem );

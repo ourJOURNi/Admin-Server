@@ -1,6 +1,6 @@
 const { json } = require('express');
+const { format } = require('date-fns');
 const Fair = require('../models/fairs.model');
-
 
 exports.getFairs = (req, res) => {
   Fair.find( (err, fairs) => {
@@ -13,7 +13,7 @@ exports.getFair = (req, res) => {
   // console.log(req.body);
   id = req.body._id;
   console.log('Getting fair info...');
-  
+
   Fair.findById(
     id,
     (err, fair) => {
@@ -80,14 +80,12 @@ exports.getFair = (req, res) => {
     });
   })
 }
-
 exports.addFair = (req, res) => {
-  console.log(req.body);
 
   let fair = {
     title: req.body.title,
-    date: req.body.date,
-    time: req.body.time,
+    date: format(new Date(req.body.date), 'MMMM dd, yyyy'),
+    time: format(new Date(req.body.date), 'hh:mm a'),
     address: req.body.address,
     city: req.body.city,
     state: req.body.state,
@@ -95,11 +93,11 @@ exports.addFair = (req, res) => {
     students: req.body.students,
     chaperons: req.body.chaperons,
     partners: req.body.partners,
+    volunteers: req.body.volunteers,
     dateCreated: Date.now(),
-    description: req.body.description,
     summary: req.body.summary
   }
-
+  console.log(fair);
   let newFair = Fair(fair);
 
   newFair.save( (err, fair) => {
@@ -111,28 +109,22 @@ exports.addFair = (req, res) => {
   })
 
 }
-
 exports.deleteFair = (req, res) => {
-
-  Fair.findByIdAndDelete( req.params._id, (err) => {
+  console.log(req.body);
+  Fair.findByIdAndDelete( req.body.id, (err) => {
     if (err) return err;
+    console.log(req.body.id + ' Fair deleted');
+    res.status(200).json(req.body.id + ' Fair deleted');
   } );
-  console.log(req);
-  console.log(req.params._id + ' Fair deleted');
-  res.status(200).json(req.params._id + ' Fair deleted');
 }
-
 exports.updateFair = (req, res) => {
   let date = req.body.date;
-  let time = req.body.time;
-  let isoDate = new Date(date + " " + time);
+  let isoDate = new Date(date);
 
-  delete req.body.time;
   req.body.date = isoDate;
 
   console.log(req.body);
   console.log(date);
-  console.log(time);
   console.log(isoDate);
 
   if (!req.body._id  ) {
@@ -150,17 +142,14 @@ exports.updateFair = (req, res) => {
       return res.status(400).send('There was an error updating the fair in the database: \n\n' + err);
     }
 
-    console.log('Updated Fair: ' + fair);
+    console.log('Updated Fair: ');
+    console.log(fair);
     return res.status(200).send(fair);
     }
   )
 }
-
 exports.printStudents = (req, res) => {
-
 }
-
-
 exports.addStudentAgendaItem = (req, res) => {
   let id = req.body.id;
   let title = req.body.title;
@@ -179,7 +168,6 @@ exports.addStudentAgendaItem = (req, res) => {
       if (fair) return res.status(200).json(fair.studentAgenda);
     });
 }
-
 exports.deleteStudentAgendaItem = (req, res) => {
   console.log('Deleting Student Agenda Item... \n');
   let id = req.body.fairId;
@@ -205,7 +193,6 @@ exports.deleteStudentAgendaItem = (req, res) => {
         })
     })
 }
-
 exports.editStudentAgendaItem = (req, res) => {
   let id = req.body.id;
   let title = req.body.title;
@@ -237,8 +224,6 @@ exports.editStudentAgendaItem = (req, res) => {
         })
     })
 }
-
-
 exports.addChaperoneAgendaItem = (req, res) => {
   let id = req.body.id;
   let title = req.body.title;
@@ -257,7 +242,6 @@ exports.addChaperoneAgendaItem = (req, res) => {
       if (fair) return res.status(200).json(fair.chaperoneAgenda);
     });
 }
-
 exports.deleteChaperoneAgendaItem = (req, res) => {
   console.log('Deleting Chaperone Agenda Item... \n');
   let id = req.body.fairId;
@@ -284,7 +268,6 @@ exports.deleteChaperoneAgendaItem = (req, res) => {
     })
 
 }
-
 exports.editChaperoneAgendaItem = (req, res) => {
   let id = req.body.id;
   let title = req.body.title;
@@ -316,7 +299,6 @@ exports.editChaperoneAgendaItem = (req, res) => {
         })
     })
 }
-
 exports.addVolunteer = (req, res) => {
   console.log('Attempting to ADD a volunteer');
   let id = req.body.id;
@@ -339,7 +321,6 @@ exports.addVolunteer = (req, res) => {
     }
   )
 }
-
 exports.editVolunteer = (req, res) => {
   console.log('Attempting to EDIT a volunteer');
   let id = req.body.id;
@@ -370,7 +351,6 @@ exports.editVolunteer = (req, res) => {
         })
     })
 }
-
 exports.deleteVolunteer = (req, res) => {
   console.log('Attempting to DELETE a volunteer');
   console.log(req.body);
@@ -399,7 +379,6 @@ exports.deleteVolunteer = (req, res) => {
     }
   )
 }
-
 exports.addVolunteerAgendaItem = (req, res) => {
   let id = req.body.id;
   let title = req.body.title;
@@ -418,7 +397,6 @@ exports.addVolunteerAgendaItem = (req, res) => {
       if (fair) return res.status(200).json(fair.volunteerAgenda);
     });
 }
-
 exports.deleteVolunteerAgendaItem = (req, res) => {
   console.log('Deleting Volunteer Agenda Item... \n');
   let id = req.body.fairId;
@@ -445,7 +423,6 @@ exports.deleteVolunteerAgendaItem = (req, res) => {
     })
 
 }
-
 exports.editVolunteerAgendaItem = (req, res) => {
   let id = req.body.id;
   let title = req.body.title;
@@ -477,7 +454,6 @@ exports.editVolunteerAgendaItem = (req, res) => {
         })
     })
 }
-
 exports.deleteVolunteerFAQ = (req, res) => {
   let id = req.body.fairId;
   let itemIndex = req.body.index;
@@ -502,7 +478,6 @@ exports.deleteVolunteerFAQ = (req, res) => {
         })
     })
 }
-
 exports.editVolunteerFAQ = (req, res) => {
   let id = req.body.id;
   let index = req.body.index;
@@ -534,7 +509,6 @@ exports.editVolunteerFAQ = (req, res) => {
         })
     })
 }
-
 exports.addVolunteerFAQ = (req, res) => {
   let id = req.body.id;
   let question = req.body.question;
@@ -553,8 +527,6 @@ exports.addVolunteerFAQ = (req, res) => {
       if (fair) return res.status(200).json(fair.volunteerFAQ);
     });
 }
-
-
 exports.addPartnerAgendaItem = (req, res) => {
   let id = req.body.id;
   let title = req.body.title;
@@ -573,7 +545,6 @@ exports.addPartnerAgendaItem = (req, res) => {
       if (fair) return res.status(200).json(fair.partnerAgenda);
     });
 }
-
 exports.deletePartnerAgendaItem = (req, res) => {
   console.log('Deleting Partner Agenda Item... \n');
   let id = req.body.fairId;
@@ -599,7 +570,6 @@ exports.deletePartnerAgendaItem = (req, res) => {
         })
     })
 }
-
 exports.editPartnerAgendaItem = (req, res) => {
   let id = req.body.id;
   let title = req.body.title;
@@ -631,7 +601,6 @@ exports.editPartnerAgendaItem = (req, res) => {
         })
     })
 }
-
 exports.deletePartnerFAQ = (req, res) => {
   let id = req.body.fairId;
   let itemIndex = req.body.index;
@@ -656,7 +625,6 @@ exports.deletePartnerFAQ = (req, res) => {
         })
     })
 }
-
 exports.editPartnerFAQ = (req, res) => {
   let id = req.body.id;
   let index = req.body.index;
@@ -688,7 +656,6 @@ exports.editPartnerFAQ = (req, res) => {
         })
     })
 }
-
 exports.addPartnerFAQ = (req, res) => {
   let id = req.body.id;
   let question = req.body.question;
@@ -707,7 +674,6 @@ exports.addPartnerFAQ = (req, res) => {
       if (fair) return res.status(200).json(fair.partnerFAQ);
     });
 }
-
 exports.verifyPartner = (req, res) => {
   console.log('Attempting to VERIFY Partner \n');
   console.log(req.body);
@@ -725,7 +691,6 @@ exports.verifyPartner = (req, res) => {
     }
   )
 }
-
 exports.unverifyPartner = (req, res) => {
   console.log('Attempting to UNVERIFY Partner \n');
   console.log(req.body);
