@@ -23,6 +23,9 @@ const DeniedPostSchema = new mongoose.Schema({
   creatorEmail : {
     type: String
   },
+  creatorProfilePicture : {
+    type: String
+  },
   date : {
     type: Date
   },
@@ -36,7 +39,14 @@ const DeniedPostSchema = new mongoose.Schema({
 },
   post : {
     type: String,
+  },
+  title : {
+    type: String,
     maxlength: 500
+  },
+  hashtags : {
+    type: Array,
+    default: []
   }
 })
 

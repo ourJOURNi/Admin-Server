@@ -7,7 +7,7 @@ const ReportedCommentArchiveSchema = new mongoose.Schema({
   commentID : {
     type: String
   },
-  comment : {
+  commentContents : {
     type: String
   },
   postID : {
@@ -26,6 +26,12 @@ const ReportedCommentArchiveSchema = new mongoose.Schema({
     type: String
   },
   reportedUserName : {
+    type: String
+  },
+  reportedUserProfilePicture : {
+    type: String
+  },
+  reportReason: {
     type: String
   }
 })
